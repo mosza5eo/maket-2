@@ -1,0 +1,95 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  
+  /* border-radius: 400px; */
+  
+  margin-bottom: 30px;
+  height: 300px;
+  
+}
+.containerdiv {
+  width: 300px;
+  height: 300px;
+  margin: 100px 15px ;
+  
+  
+}
+
+
+.BoxShadow:hover {
+  background: #eff0f5;
+  box-shadow: 0 4px 16px 0 rgba(34, 33, 33, 0.15);
+  
+  
+}
+.textOverflow {
+  white-space: nowrap;
+  width: 285px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  font-size: 1rem;
+  font-family: Palatino, serif;
+  word-wrap: break-word;
+  color: #000;
+  margin-left: 15px;
+}
+.price{
+    color: rgb(254, 73, 96);
+    margin-left: 15px;
+    font-size: 1.875rem;
+    font-weight: 500;
+
+}
+.fitImg{
+    object-fit: cover;
+    overflow-clip-margin: content-box;
+    overflow: clip;
+}
+.fontH{
+    font-size: 20px;
+
+}
+.fontEn{
+   font-family: Andale Mono, monospace;
+}
+
+.btnsty:hover {
+  background: #eff0f5;
+  box-shadow: 0 4px 16px 0 rgba(34, 33, 33, 0.15);
+}
+.searchButton {
+  position: relative;
+  background: #f7f7f7;
+  border: #fff;
+}
+.searchButton:hover{
+  border: solid;
+  border-color: #000;
+}
+
+
+.searchIcon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+}
+.actionHighAndLow{
+  background-color: rgb(244, 108, 4);
+  color: #fff;
+  border-radius: 3px;
+}
+.button.clicked {
+  background-color: red;
+}
+.button.clicked.twice {
+  background-color: green;
+}
+
+
+
