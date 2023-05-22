@@ -1,3 +1,8 @@
+import packageJson from "@/package.json";
 export default function Footer() {
-  return <footer>copyright 2023 | Moss</footer>;
+  return (
+    <footer>
+      <span> เวอร์ชัน: {packageJson["version"]}</span>
+    </footer>
+  );
 }
