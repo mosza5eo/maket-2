@@ -86,7 +86,6 @@ export default function ProductDetail({ product }) {
                   className={styles.fitImg}
                 />
               </Box>
-              
             </Grid>
             <Grid sm={1}>
               <Box
@@ -135,13 +134,19 @@ export default function ProductDetail({ product }) {
                 <Grid item sm={10}>
                   <Box>
                     <Grid container>
-                      <Grid item>
+                      <Grid item sm={1.3}>
                         <h1 className={styles.price}>$ {product.price}</h1>
                       </Grid>
-                      <Grid item>
+                      <Grid item sm={2.1}>
                         <h2 className={styles.discountPercentage}>
                           ได้ส่วนลด {product.discountPercentage} %
                         </h2>
+                      </Grid>
+                      <Grid item sm={.5}></Grid>
+                      <Grid item sm={3} sx={{ marginTop: 1.8 }}>
+                        <p className={styles.fontStock}>
+                          มีสินค้าทั้งหมด {product.stock} ชิ้น
+                        </p>
                       </Grid>
                     </Grid>
                   </Box>
