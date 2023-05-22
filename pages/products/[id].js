@@ -102,14 +102,14 @@ export default function ProductDetail({ product }) {
 
             <Grid sm={7}>
               <Grid container spacing={1} m={1}>
-                <Grid item sm={12}>
+                <Grid sm={12}>
                   <Box>
                     <h2 className={styles.textOverflow}>
                       {product.title} : {product.description}
                     </h2>
                   </Box>
                 </Grid>
-                <Grid item sm={12}>
+                <Grid sm={12}>
                   <Box>
                     <Typography component="legend">
                       คะแนน: {product.rating}
@@ -122,32 +122,43 @@ export default function ProductDetail({ product }) {
                     />
                   </Box>
                 </Grid>
-                <Grid item sm={2}>
+                <Grid sm={2}>
                   <p> Brand: {product.brand}</p>
                 </Grid>
-                <Grid item sm={10}>
+                <Grid sm={10}>
                   <p> Category: {product.category}</p>
                 </Grid>
-                <Grid item sm={11}>
+                <Grid sm={11}>
                   <Box sx={{ backgroundColor: "black" }} height={1.4}></Box>
                 </Grid>
-                <Grid item sm={10}>
+                <Grid sm={10}>
                   <Box>
                     <Grid container>
-                      <Grid item sm={1.3}>
+                      <Grid sm={1.3}>
                         <h1 className={styles.price}>$ {product.price}</h1>
                       </Grid>
-                      <Grid item sm={2.1}>
+                      <Grid sm={2.1}>
                         <h2 className={styles.discountPercentage}>
                           ได้ส่วนลด {product.discountPercentage} %
                         </h2>
                       </Grid>
-                      <Grid item sm={.5}></Grid>
-                      <Grid item sm={3} sx={{ marginTop: 1.8 }}>
+                      <Grid sm={0.5}></Grid>
+                      <Grid sm={3} sx={{ marginTop: 1.8 }}>
                         <p className={styles.fontStock}>
                           มีสินค้าทั้งหมด {product.stock} ชิ้น
                         </p>
                       </Grid>
+                    </Grid>
+
+                    <Grid sm={12}>
+                      <Box>
+                        <Grid sm={2}>
+                          <p>จำนวน</p>
+                        </Grid>
+                        <Grid sm={6}>
+                          <input type="number" />
+                        </Grid>
+                      </Box>
                     </Grid>
                   </Box>
                 </Grid>
