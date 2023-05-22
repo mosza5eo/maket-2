@@ -15,7 +15,7 @@ import React, { useState, useEffect } from "react";
 import { yellow } from "@mui/material/colors";
 import debug from "./debug";
 import ProductCard from "@/components/ProductCard";
-//https://dummyjson.com/products?limit=12
+
 
 export async function getStaticProps() {
   const res = await fetch("https://dummyjson.com/products?limit=30");
