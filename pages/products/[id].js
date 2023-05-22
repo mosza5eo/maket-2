@@ -33,12 +33,15 @@ export default function ProductDetail({ product }) {
 
   const handleImageNavigation = (direction) => {
     if (direction === "left") {
-      setCurrentImageIndex((prevIndex) =>
-        prevIndex > 0 ? prevIndex - 1 : product.images.length - 1
+      setCurrentImageIndex(
+        (
+          prevIndex //prevIndex จะถูกกำหนดค่าทุกครั้งที่ผู้ใช้กดปุ่มเปลี่ยนรูปภาพ
+        ) => (prevIndex > 0 ? prevIndex - 1 : product.images.length - 1) //โดยลดค่าลง 1 ถ้าค่า prevIndex ยังไม่ถึง 0 ให้ลดลง 1 ถ้าถึง 0 ให้กลับมาที่ค่าสูงสุดที่อาร์เรย์
       );
     } else if (direction === "right") {
-      setCurrentImageIndex((prevIndex) =>
-        prevIndex < product.images.length - 1 ? prevIndex + 1 : 0
+      setCurrentImageIndex(
+        (prevIndex) =>
+          prevIndex < product.images.length - 1 ? prevIndex + 1 : 0 // โดยเพิ่มค่าลง 1 ถ้าค่า prevIndex ยังไม่ถึงค่าสูงสุดที่อาร์เรย์ ถ้าถึงค่าสูงสุด ให้กลับมาที่ 0
       );
     }
   };
@@ -55,27 +58,45 @@ export default function ProductDetail({ product }) {
         </Head>
         <Box className={styles.container}>
           <Grid container spacing={1}>
-            <Grid sm={5} sx={{ padding: 3 }}>
+            <Grid sm={1}>
+              <Box
+                sx={{ display: "flex", justifyContent: "right", marginTop: 20 }}
+              >
+                <button
+                  onClick={() => handleImageNavigation("left")}
+                  className={styles.btnPrevIndexImg}
+                >
+                  {"◀"}
+                </button>
+              </Box>
+            </Grid>
+            <Grid sm={3} sx={{ padding: 3 }}>
               <Box
                 sx={{ m: 1 }}
                 marginTop={5}
                 display="flex"
                 justifyContent="center"
-                className={styles.fitImg}
+                height={"300px"}
               >
                 <Avatar
                   src={product.images[currentImageIndex]}
                   alt={product.title}
                   sx={{ width: "300px", height: "auto" }}
                   variant="square"
+                  className={styles.fitImg}
                 />
               </Box>
-              <Box sx={{ display: "flex", justifyContent: "center" }}>
-                <button onClick={() => handleImageNavigation("left")}>
-                  รูปก่อนหน้า
-                </button>
-                <button onClick={() => handleImageNavigation("right")}>
-                 รูปถัดไป
+              
+            </Grid>
+            <Grid sm={1}>
+              <Box
+                sx={{ display: "flex", justifyContent: "left", marginTop: 20 }}
+              >
+                <button
+                  onClick={() => handleImageNavigation("right")}
+                  className={styles.btnPrevIndexImg}
+                >
+                  {"▶"}
                 </button>
               </Box>
             </Grid>
