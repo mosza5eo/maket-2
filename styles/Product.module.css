@@ -2,27 +2,21 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: left;
-  
+
   /* border-radius: 400px; */
-  
+
   margin-bottom: 30px;
   height: 300px;
-  
 }
 .containerdiv {
   width: 300px;
   height: 300px;
-  margin: 100px 15px ;
-  
-  
+  margin: 100px 15px;
 }
-
 
 .BoxShadow:hover {
   background: #eff0f5;
   box-shadow: 0 4px 16px 0 rgba(34, 33, 33, 0.15);
-  
-  
 }
 .textOverflow {
   white-space: nowrap;
@@ -36,24 +30,22 @@
   color: #000;
   margin-left: 15px;
 }
-.price{
-    color: rgb(254, 73, 96);
-    margin-left: 15px;
-    font-size: 1.875rem;
-    font-weight: 500;
-
+.price {
+  color: rgb(254, 73, 96);
+  margin-left: 15px;
+  font-size: 1.875rem;
+  font-weight: 500;
 }
-.fitImg{
-    object-fit: cover;
-    overflow-clip-margin: content-box;
-    overflow: clip;
+.fitImg {
+  object-fit: cover;
+  overflow-clip-margin: content-box;
+  overflow: clip;
 }
-.fontH{
-    font-size: 20px;
-
+.fontH {
+  font-size: 20px;
 }
-.fontEn{
-   font-family: Andale Mono, monospace;
+.fontEn {
+  font-family: Andale Mono, monospace;
 }
 
 .btnsty:hover {
@@ -65,11 +57,6 @@
   background: #f7f7f7;
   border: #fff;
 }
-.searchButton:hover{
-  border: solid;
-  border-color: #000;
-}
-
 
 .searchIcon {
   position: absolute;
@@ -79,10 +66,14 @@
   width: 16px;
   height: 16px;
 }
-.actionHighAndLow{
-  background-color: rgb(244, 108, 4);
-  color: #fff;
+.actionHighAndLow {
+  background-color: #f7f7f7;
+  color: rgb(244, 108, 4);
+
   border-radius: 3px;
+}
+.actionHighAndLow:active {
+  background-color: rgb(20, 192, 20);
 }
 .button.clicked {
   background-color: red;
@@ -90,6 +81,25 @@
 .button.clicked.twice {
   background-color: green;
 }
-
-
-
+.textOverflow {
+  font-size: 1.5rem;
+  font-family: Palatino, serif;
+  word-wrap: break-word;
+  color: #000000cc;
+  font-weight: 500;
+}
+.figSearchButton {
+  position: fixed;
+  top: 20%;
+  right: 5%;
+  transform: translateY(-50%);
+}
+.fontHeadCategory {
+  float: left;
+  font-family: Roboto-Regular;
+  font-size: 22px;
+  color: #424242;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

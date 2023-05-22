@@ -39,7 +39,7 @@ export default function Index({ products, categories }) {
 
   useEffect(() => {
     handleSearch(); //เรียกใช้ก่อนเพื่อให้filteredProductsถูกเรียกใช้แล้วไปแสดงผล
-  }, [priceFilter, searchTerm]); //เหมือนกัน
+  }, [priceFilter, searchTerm, sortOrder]); //เหมือนกัน
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -53,16 +53,18 @@ export default function Index({ products, categories }) {
     handleSearch(); // เรียกใช้ handleSearch เมื่อมีการเปลี่ยนแปลงราคา
   };
 
-  const toggleSortOrder = () => {
-    if (sortOrder === "lowPrice") {
-      setSortOrder("highPrice"); //ถ้า น้อย ก็set เป็น มาก
-    } else {
-      setSortOrder("lowPrice"); // ฟังก์ชันเพื่อเปลี่ยนลำดับการเรียงราคา
-    }
+  const toggleSortHighOrder = () => {
+    setSortOrder("highPrice");
+    console.log(sortOrder);
+  };
+
+  const toggleSortLowOrder = () => {
+    setSortOrder("lowPrice");
+    console.log(sortOrder);
   };
 
   const sortedProducts = products.slice().sort((a, b) => {
-    if (sortOrder === "highPrice") {
+    if (sortOrder === "lowPrice") {
       //ถ้าน้อย
       return a.price - b.price;
     } else {
@@ -100,8 +102,79 @@ export default function Index({ products, categories }) {
         <Box>
           <Grid container>
             <Grid sm={12}>
-              <Box>
-                <h1>หมวดหมู่</h1>
+              <Box
+                marginLeft={7}
+                sx={{ display: "flex", justifyContent: "right" }}
+                // className={styles.figSearchButton}
+              >
+                <p className={styles.fontH} sx={{ display: "flex" }}>
+                  ค้นหาสินค้า
+                </p>
+
+                <Button onClick={handleSearch} className={styles.searchButton}>
+                  <input
+                    type="text"
+                    value={searchTerm}
+                    onChange={handleSearchChange}
+                    placeholder="ค้นหาสินค้า"
+                  />
+                  <Image
+                    src="https://cdn.icon-icons.com/icons2/1129/PNG/512/searchmagnifierinterfacesymbol1_79893.png"
+                    alt="Search Icon"
+                    className={styles.searchIcon}
+                    width="16"
+                    height="16"
+                  />
+                </Button>
+              </Box>
+            </Grid>
+            <Grid container>
+              {/* <Grid sm={12}>
+                <Box height={60} sx={{backgroundColor:yellow[500]}}>
+
+                </Box>
+              </Grid> */}
+              <Grid sm={12}>
+                <Box
+                  marginLeft={7}
+                  sx={{ display: "flex", justifyContent: "right" }}
+                >
+                  <p className={styles.fontH}>ค้นหาด้วยราคา</p>
+                  <Button
+                    onClick={handleSearch}
+                    className={styles.searchButton}
+                  >
+                    <input
+                      type="text"
+                      value={priceFilter}
+                      height={200}
+                      onChange={handlePriceChange}
+                      placeholder="ราคา"
+                      display="flex"
+                    />
+                    <Box onClick={handleSearch}>
+                      <Box
+                        onClick={toggleSortHighOrder}
+                        width={20}
+                        className={styles.actionHighAndLow}
+                      >
+                        ↑
+                      </Box>
+                      <Box
+                        onClick={toggleSortLowOrder}
+                        width={20}
+                        className={styles.actionHighAndLow}
+                      >
+                        ↓
+                      </Box>
+                    </Box>
+                  </Button>
+                </Box>
+              </Grid>
+            </Grid>
+            <Grid sm={12}>
+              <Box sx={{ marginLeft: 2 }}>
+                <h1 className={styles.fontH}>หมวดหมู่</h1>
               </Box>
             </Grid>
             <Grid sm={12}>
@@ -125,58 +198,6 @@ export default function Index({ products, categories }) {
           </Grid>
         </Box>
         <Box>
-          <Grid container>
-            <Grid sm={7}></Grid>
-            <Grid
-              sm={7}
-              sx={{ display: "flex", justifyContent: "right" }}
-              className={styles}
-            >
-              <Box marginLeft={7}>
-                <p className={styles.fontH} sx={{ display: "flex" }}>
-                  ค้นหาสินค้า
-                </p>
-
-                <Button onClick={handleSearch} className={styles.searchButton}>
-                  <input
-                    type="text"
-                    value={searchTerm}
-                    onChange={handleSearchChange}
-                    placeholder="ค้นหาสินค้า"
-                  />
-                  <Image
-                    src="https://cdn.icon-icons.com/icons2/1129/PNG/512/searchmagnifierinterfacesymbol1_79893.png"
-                    alt="Search Icon"
-                    className={styles.searchIcon}
-                    width="16"
-                    height="16"
-                  />
-                </Button>
-              </Box>
-            </Grid>
-            <Grid sm={4} sx={{ display: "flex", justifyContent: "right" }}>
-              <Box marginLeft={7}>
-                <p className={styles.fontH}>ค้นหาด้วยราคา</p>
-
-                <Button onClick={handleSearch} className={styles.searchButton}>
-                  <input
-                    type="text"
-                    value={priceFilter}
-                    onChange={handlePriceChange}
-                    placeholder="ราคา"
-                  />
-
-                  <Box
-                    onClick={toggleSortOrder}
-                    width={10}
-                    className={styles.actionHighAndLow}
-                  >
-                    {sortOrder === "lowPrice" ? "↓" : "↑"}
-                  </Box>
-                </Button>
-              </Box>
-            </Grid>
-          </Grid>
           <Box className={styles.container}>
             {filteredProducts.map((item) => (
               <ProductCard key={item.id} products={item} />
