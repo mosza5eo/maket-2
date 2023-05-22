@@ -180,7 +180,7 @@ export default function Index({ products, categories }) {
             <Grid sm={12}>
               <Grid container>
                 {categories.map((category) => (
-                  <Grid key={category} sm={2} className={styles.BoxShadow}>
+                  <Grid key={category} sm={2} className={styles.buttonCategory}>
                     <Link href={`/products/categorys/${category}`}>
                       <Card sx={{ maxWidth: 250 }} className={styles.fitImg}>
                         {/* ... */}
