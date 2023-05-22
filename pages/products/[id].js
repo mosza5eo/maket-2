@@ -29,6 +29,20 @@ export async function getStaticProps({ params }) {
 }
 
 export default function ProductDetail({ product }) {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const handleImageNavigation = (direction) => {
+    if (direction === "left") {
+      setCurrentImageIndex((prevIndex) =>
+        prevIndex > 0 ? prevIndex - 1 : product.images.length - 1
+      );
+    } else if (direction === "right") {
+      setCurrentImageIndex((prevIndex) =>
+        prevIndex < product.images.length - 1 ? prevIndex + 1 : 0
+      );
+    }
+  };
+
   return (
     <>
       <Box
@@ -50,11 +64,19 @@ export default function ProductDetail({ product }) {
                 className={styles.fitImg}
               >
                 <Avatar
-                  src={product.thumbnail}
+                  src={product.images[currentImageIndex]}
                   alt={product.title}
                   sx={{ width: "300px", height: "auto" }}
                   variant="square"
                 />
+              </Box>
+              <Box sx={{ display: "flex", justifyContent: "center" }}>
+                <button onClick={() => handleImageNavigation("left")}>
+                  รูปก่อนหน้า
+                </button>
+                <button onClick={() => handleImageNavigation("right")}>
+                 รูปถัดไป
+                </button>
               </Box>
             </Grid>
 

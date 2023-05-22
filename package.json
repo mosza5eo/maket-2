@@ -6,7 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "release": "release-it -VV — ci — no-git.requireUpstream",
+    "sonar": "node sonar-project.js",
+    "patch": "release-it patch --ci",
+    "minor": "release-it minor --ci",
+    "major": "release-it major --ci"
   },
   "dependencies": {
     "@emotion/react": "^11.11.0",
@@ -18,6 +23,7 @@
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.4",
     "react-dom": "^18.2.0",
-    "reactstrap": "^9.1.10"
+    "reactstrap": "^9.1.10",
+    "release-it": "^15.10.3"
   }
 }
