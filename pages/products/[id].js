@@ -1,4 +1,4 @@
-import { Box, Grid, Rating, Typography } from "@mui/material";
+import { Box, Grid, Rating, TextField, Typography } from "@mui/material";
 import { Avatar } from "@mui/material";
 import { useRouter } from "next/router";
 import Head from "next/head";
@@ -30,6 +30,7 @@ export async function getStaticProps({ params }) {
 
 export default function ProductDetail({ product }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [quantity, setQuantity] = useState(0);
 
   const handleImageNavigation = (direction) => {
     if (direction === "left") {
@@ -43,6 +44,29 @@ export default function ProductDetail({ product }) {
         (prevIndex) =>
           prevIndex < product.images.length - 1 ? prevIndex + 1 : 0 // โดยเพิ่มค่าลง 1 ถ้าค่า prevIndex ยังไม่ถึงค่าสูงสุดที่อาร์เรย์ ถ้าถึงค่าสูงสุด ให้กลับมาที่ 0
       );
+    }
+  };
+
+  const handleQuantityChange = (event) => {
+  const value = parseInt(event.target.value); // แปลงค่าที่รับเข้ามาให้เป็นตัวเลข
+
+  // ตรวจสอบว่าค่าที่รับเข้ามาเกินค่าสูงสุดที่เป็นไปได้หรือไม่
+  if (value > product.stock) {
+    setQuantity(product.stock); // กำหนดค่าใน state เป็นค่าสูงสุดที่เป็นไปได้
+  } else {
+    setQuantity(value); // กำหนดค่าใน state เป็นค่าที่รับเข้ามา
+  }
+};
+
+  const handleDecreaseQuantity = () => {
+    if (parseInt(quantity) > 0) {
+      setQuantity((prevQuantity) => prevQuantity - 1);
+    }
+  };
+
+  const handleIncreaseQuantity = () => {
+    if (parseInt(quantity) < product.stock) {
+      setQuantity((prevQuantity) => prevQuantity + 1);
     }
   };
 
@@ -151,13 +175,49 @@ export default function ProductDetail({ product }) {
                     </Grid>
 
                     <Grid sm={12}>
-                      <Box>
-                        <Grid sm={2}>
-                          <p>จำนวน</p>
-                        </Grid>
-                        <Grid sm={6}>
-                          <input type="number" />
-                        </Grid>
+                      <Box
+                        marginLeft={7}
+                        sx={{
+                          display: "flex",
+                          justifyContent: "left",
+
+                          height: "40px",
+                        }}
+                      >
+                        <Box
+                          sx={{
+                            marginRight: 5,
+                            marginBottom: 5,
+                            display: "flex",
+                            justifyContent: "left",
+                          }}
+                        >
+                          <p className={styles.fontStock}>จำนวน</p>
+                        </Box>
+                        <button
+                          onClick={handleDecreaseQuantity}
+                          className={styles.btnQuantity}
+                        >
+                          -
+                        </button>
+                        <Box width={80}>
+                          <TextField
+                            type="number"
+                            value={quantity}
+                            onChange={handleQuantityChange}
+                            size="small"
+                            inputProps={{
+                              max: product.stock, // กำหนดค่าสูงสุดในการใส่ได้ให้เป็นค่า product.stock
+                            }}
+                          />
+                        </Box>
+
+                        <button
+                          onClick={handleIncreaseQuantity}
+                          className={styles.btnQuantity}
+                        >
+                          +
+                        </button>
                       </Box>
                     </Grid>
                   </Box>
