@@ -93,7 +93,7 @@ export default function Index({ products, categories }) {
 
   return (
     <>
-      <Box sx={{ m: 5, backgroundColor: "#f7f7f7" }} height={1550}>
+      <Box sx={{ m: 5, backgroundColor: "#f7f7f7" }} height={4500}>
         <Head>
           <title>สินค้าทั้งหมด | moss</title>
           <meta name="keywords" content="ขายของ,ร้านขายของ,ขายสินค้า" />
