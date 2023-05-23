@@ -111,14 +111,14 @@ export default function ProductDetail({ product }) {
                 />
                 {currentImageIndex === 0 && (
                   <Avatar
-                    src="https://th-live-01.slatic.net/p/ed0d9930fecc5e7625d1ef5940a9cb63.jpg"
+                    src="/img/FD.png"
                     alt={product.title}
                     variant="square"
                     style={{
                       width: "60px",
                       height: "50px",
                       position: "absolute",
-                      top: "54.02%",
+                      top: "58.02%",
                       left: "13.68%",
                       transform: "translate(-50%, -50%)",
                       zIndex: 1,
