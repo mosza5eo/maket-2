@@ -109,6 +109,23 @@ export default function ProductDetail({ product }) {
                   variant="square"
                   className={styles.fitImg}
                 />
+                {currentImageIndex === 0 && (
+                  <Avatar
+                    src="https://th-live-01.slatic.net/p/ed0d9930fecc5e7625d1ef5940a9cb63.jpg"
+                    alt={product.title}
+                    variant="square"
+                    style={{
+                      width: "60px",
+                      height: "50px",
+                      position: "absolute",
+                      top: "54.02%",
+                      left: "13.68%",
+                      transform: "translate(-50%, -50%)",
+                      zIndex: 1,
+                    }}
+                    className={styles.fitImg}
+                  />
+                )}
               </Box>
             </Grid>
             <Grid sm={1}>
