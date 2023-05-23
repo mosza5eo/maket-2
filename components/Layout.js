@@ -4,10 +4,10 @@ import Navbar from "./Navbar";
 import { yellow } from "@mui/material/colors";
 export default function Layout({ children }) {
   return (
-    <div>
+    <Box>
       <Navbar />
       <main>{children}</main>
       <Footer />
-    </div>
+    </Box>
   );
 }
