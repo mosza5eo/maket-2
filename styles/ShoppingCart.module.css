@@ -1,0 +1,41 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  margin-left: 40px;
+  margin-bottom: 30px;
+  height: 300px;
+}
+.containerdiv {
+  width: 300px;
+  height: 300px;
+  margin: 120px 15px;
+}
+
+.BoxShadow:hover {
+  background: #eff0f5;
+  box-shadow: 0 4px 16px 0 rgba(34, 33, 33, 0.15);
+}
+.textOverflow {
+  white-space: nowrap;
+  width: 285px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  font-size: 1rem;
+  font-family: Palatino, serif;
+  word-wrap: break-word;
+  color: #000;
+  margin-left: 15px;
+}
+.price {
+  color: rgb(254, 73, 96);
+  margin-left: 15px;
+  font-size: 1.875rem;
+  font-weight: 500;
+}
+.fitImg {
+  object-fit: cover;
+  overflow-clip-margin: content-box;
+  overflow: clip;
+}

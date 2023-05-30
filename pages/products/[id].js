@@ -1,9 +1,19 @@
-import { Box, Grid, Rating, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Grid,
+  Rating,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { Avatar } from "@mui/material";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import styles from "@/styles/Detail.module.css";
+import React from "react";
+import { useDispatch,useSelector } from "react-redux";
+import { addToCart } from "@/store/slices/cartSlice";
 
 export async function getStaticPaths() {
   const res = await fetch("https://dummyjson.com/products?limit=30");
@@ -27,10 +37,13 @@ export async function getStaticProps({ params }) {
     props: { product: data },
   };
 }
-
+///////////////////////////////////////////
 export default function ProductDetail({ product }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(1);//เริ่มต้นจำนวนชิ้นของสินค้าที่1ชิน
+  ////
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
 
   const handleImageNavigation = (direction) => {
     if (direction === "left") {
@@ -48,18 +61,18 @@ export default function ProductDetail({ product }) {
   };
 
   const handleQuantityChange = (event) => {
-  const value = parseInt(event.target.value); // แปลงค่าที่รับเข้ามาให้เป็นตัวเลข
+    const value = parseInt(event.target.value); // แปลงค่าที่รับเข้ามาให้เป็นตัวเลข
 
-  // ตรวจสอบว่าค่าที่รับเข้ามาเกินค่าสูงสุดที่เป็นไปได้หรือไม่
-  if (value > product.stock) {
-    setQuantity(product.stock); // กำหนดค่าใน state เป็นค่าสูงสุดที่เป็นไปได้
-  } else {
-    setQuantity(value); // กำหนดค่าใน state เป็นค่าที่รับเข้ามา
-  }
-};
+    // ตรวจสอบว่าค่าที่รับเข้ามาเกินค่าสูงสุดที่เป็นไปได้หรือไม่
+    if (value > product.stock) {
+      setQuantity(product.stock); // กำหนดค่าใน state เป็นค่าสูงสุดที่เป็นไปได้
+    } else {
+      setQuantity(value); // กำหนดค่าใน state เป็นค่าที่รับเข้ามา
+    }
+  };
 
   const handleDecreaseQuantity = () => {
-    if (parseInt(quantity) > 0) {
+    if (parseInt(quantity) > 1) {
       setQuantity((prevQuantity) => prevQuantity - 1);
     }
   };
@@ -68,6 +81,9 @@ export default function ProductDetail({ product }) {
     if (parseInt(quantity) < product.stock) {
       setQuantity((prevQuantity) => prevQuantity + 1);
     }
+  };
+  const handleAddToCart = () => {
+    dispatch(addToCart({ ...product, quantity }));
   };
 
   return (
@@ -118,7 +134,7 @@ export default function ProductDetail({ product }) {
                       width: "60px",
                       height: "50px",
                       position: "absolute",
-                      top: "58.02%",
+                      top: "54.02%",
                       left: "13.68%",
                       transform: "translate(-50%, -50%)",
                       zIndex: 1,
@@ -175,7 +191,7 @@ export default function ProductDetail({ product }) {
                 <Grid sm={10}>
                   <Box>
                     <Grid container>
-                      <Grid sm={1.3}>
+                      <Grid sm={2.3}>
                         <h1 className={styles.price}>$ {product.price}</h1>
                       </Grid>
                       <Grid sm={2.1}>
@@ -211,12 +227,13 @@ export default function ProductDetail({ product }) {
                         >
                           <p className={styles.fontStock}>จำนวน</p>
                         </Box>
-                        <button
+                        <Button
+                          variant="contained"
                           onClick={handleDecreaseQuantity}
-                          className={styles.btnQuantity}
+                          color="warning"
                         >
                           -
-                        </button>
+                        </Button>
                         <Box width={80}>
                           <TextField
                             type="number"
@@ -229,12 +246,24 @@ export default function ProductDetail({ product }) {
                           />
                         </Box>
 
-                        <button
+                        <Button
+                          variant="contained"
                           onClick={handleIncreaseQuantity}
-                          className={styles.btnQuantity}
+                          color="warning"
                         >
                           +
-                        </button>
+                        </Button>
+                      </Box>
+                    </Grid>
+                    <Grid sm={12}>
+                      <Box padding={5}>
+                        <Button
+                          color="warning"
+                          variant="outlined"
+                          onClick={handleAddToCart}
+                        >
+                          เพิ่มสินค้าไปยังรถเข็น
+                        </Button>
                       </Box>
                     </Grid>
                   </Box>
