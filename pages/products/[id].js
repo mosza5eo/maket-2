@@ -12,8 +12,12 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 import styles from "@/styles/Detail.module.css";
 import React from "react";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "@/store/slices/cartSlice";
+import Stack from "@mui/material/Stack";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+import CustomPopup from "@/components/CustomPopup";
 
 export async function getStaticPaths() {
   const res = await fetch("https://dummyjson.com/products?limit=30");
@@ -40,7 +44,9 @@ export async function getStaticProps({ params }) {
 ///////////////////////////////////////////
 export default function ProductDetail({ product }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [quantity, setQuantity] = useState(1);//เริ่มต้นจำนวนชิ้นของสินค้าที่1ชิน
+  const [quantity, setQuantity] = useState(1); //เริ่มต้นจำนวนชิ้นของสินค้าที่1ชิน
+  const [open, setOpen] = React.useState(false);
+  const [visibility, setVisibility] = useState(false);
   ////
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
@@ -84,6 +90,28 @@ export default function ProductDetail({ product }) {
   };
   const handleAddToCart = () => {
     dispatch(addToCart({ ...product, quantity }));
+    setOpen(true);
+    setVisibility(false);
+  };
+
+  const popupOpenHandler = () => {
+    setVisibility(true);
+  };
+
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+
+  const popupCloseHandler = () => {
+    setVisibility(false);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
   };
 
   return (
@@ -260,10 +288,52 @@ export default function ProductDetail({ product }) {
                         <Button
                           color="warning"
                           variant="outlined"
-                          onClick={handleAddToCart}
+                          onClick={popupOpenHandler}
                         >
                           เพิ่มสินค้าไปยังรถเข็น
                         </Button>
+                        <Snackbar
+                          open={open}
+                          autoHideDuration={6000}
+                          onClose={handleClose}
+                        >
+                          <Alert
+                            onClose={handleClose}
+                            severity="success"
+                            sx={{ width: "100%" }}
+                          >
+                            สินค้าอยู่ในตะกร้าแล้ว
+                          </Alert>
+                        </Snackbar>
+                        
+                        <CustomPopup
+                          onClose={popupCloseHandler}
+                          show={visibility}
+                          title="ยืนยันการซื้อ"
+                        >
+                          <h1>{product.title}</h1>
+                          <Box
+                            sx={{
+                              // justifyContent: "end",
+                              display: "flex",
+                              backgroundColor: "#009933",
+                              marginLeft: "85.3%",
+                              borderRadius: 4,
+                              boxShadow: "0 2px 10px 0 #33CC66",
+                            }}
+                          >
+                            <Button
+                              sx={{
+                                backgroundColor: "#33CC00",
+                                borderRadius: 4,
+                                color: "#DCDCDC",
+                              }}
+                              onClick={handleAddToCart}
+                            >
+                              ตกลง
+                            </Button>
+                          </Box>
+                        </CustomPopup>
                       </Box>
                     </Grid>
                   </Box>
