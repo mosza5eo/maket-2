@@ -18,6 +18,7 @@ import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import CustomPopup from "@/components/CustomPopup";
+import Layout from "@/components/Layout";
 
 export async function getStaticPaths() {
   const res = await fetch("https://dummyjson.com/products?limit=30");
@@ -116,233 +117,243 @@ export default function ProductDetail({ product }) {
 
   return (
     <>
-      <Box
-        sx={{ m: 5, backgroundColor: "#f7f7f7" }}
-        height={450}
-        className={styles.container}
-      >
-        <Head>
-          <title>{product.title}</title>
-        </Head>
-        <Box className={styles.container}>
-          <Grid container spacing={1}>
-            <Grid sm={1}>
-              <Box
-                sx={{ display: "flex", justifyContent: "right", marginTop: 20 }}
-              >
-                <button
-                  onClick={() => handleImageNavigation("left")}
-                  className={styles.btnPrevIndexImg}
+      <Layout>
+        <Box
+          sx={{ m: 5, backgroundColor: "#f7f7f7" }}
+          height={450}
+          className={styles.container}
+        >
+          <Head>
+            <title>{product.title}</title>
+          </Head>
+          <Box className={styles.container}>
+            <Grid container spacing={1}>
+              <Grid sm={1}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "right",
+                    marginTop: 20,
+                  }}
                 >
-                  {"◀"}
-                </button>
-              </Box>
-            </Grid>
-            <Grid sm={3} sx={{ padding: 3 }}>
-              <Box
-                sx={{ m: 1 }}
-                marginTop={5}
-                display="flex"
-                justifyContent="center"
-                height={"300px"}
-              >
-                <Avatar
-                  src={product.images[currentImageIndex]}
-                  alt={product.title}
-                  sx={{ width: "300px", height: "auto" }}
-                  variant="square"
-                  className={styles.fitImg}
-                />
-                {currentImageIndex === 0 && (
+                  <button
+                    onClick={() => handleImageNavigation("left")}
+                    className={styles.btnPrevIndexImg}
+                  >
+                    {"◀"}
+                  </button>
+                </Box>
+              </Grid>
+              <Grid sm={3} sx={{ padding: 3 }}>
+                <Box
+                  sx={{ m: 1 }}
+                  marginTop={5}
+                  display="flex"
+                  justifyContent="center"
+                  height={"300px"}
+                >
                   <Avatar
-                    src="/img/FD.png"
+                    src={product.images[currentImageIndex]}
                     alt={product.title}
+                    sx={{ width: "300px", height: "auto" }}
                     variant="square"
-                    style={{
-                      width: "60px",
-                      height: "50px",
-                      position: "absolute",
-                      top: "54.02%",
-                      left: "13.68%",
-                      transform: "translate(-50%, -50%)",
-                      zIndex: 1,
-                    }}
                     className={styles.fitImg}
                   />
-                )}
-              </Box>
-            </Grid>
-            <Grid sm={1}>
-              <Box
-                sx={{ display: "flex", justifyContent: "left", marginTop: 20 }}
-              >
-                <button
-                  onClick={() => handleImageNavigation("right")}
-                  className={styles.btnPrevIndexImg}
-                >
-                  {"▶"}
-                </button>
-              </Box>
-            </Grid>
-
-            <Grid sm={7}>
-              <Grid container spacing={1} m={1}>
-                <Grid sm={12}>
-                  <Box>
-                    <h2 className={styles.textOverflow}>
-                      {product.title} : {product.description}
-                    </h2>
-                  </Box>
-                </Grid>
-                <Grid sm={12}>
-                  <Box>
-                    <Typography component="legend">
-                      คะแนน: {product.rating}
-                    </Typography>
-                    <Rating
-                      name="half-rating-read"
-                      defaultValue={product.rating}
-                      precision={0.5}
-                      readOnly
+                  {currentImageIndex === 0 && (
+                    <Avatar
+                      src="/img/FD.png"
+                      alt={product.title}
+                      variant="square"
+                      style={{
+                        width: "60px",
+                        height: "50px",
+                        position: "absolute",
+                        top: "54.02%",
+                        left: "13.68%",
+                        transform: "translate(-50%, -50%)",
+                        zIndex: 1,
+                      }}
+                      className={styles.fitImg}
                     />
-                  </Box>
-                </Grid>
-                <Grid sm={2}>
-                  <p> Brand: {product.brand}</p>
-                </Grid>
-                <Grid sm={10}>
-                  <p> Category: {product.category}</p>
-                </Grid>
-                <Grid sm={11}>
-                  <Box sx={{ backgroundColor: "black" }} height={1.4}></Box>
-                </Grid>
-                <Grid sm={10}>
-                  <Box>
-                    <Grid container>
-                      <Grid sm={2.3}>
-                        <h1 className={styles.price}>$ {product.price}</h1>
-                      </Grid>
-                      <Grid sm={2.1}>
-                        <h2 className={styles.discountPercentage}>
-                          ได้ส่วนลด {product.discountPercentage} %
-                        </h2>
-                      </Grid>
-                      <Grid sm={0.5}></Grid>
-                      <Grid sm={3} sx={{ marginTop: 1.8 }}>
-                        <p className={styles.fontStock}>
-                          มีสินค้าทั้งหมด {product.stock} ชิ้น
-                        </p>
-                      </Grid>
-                    </Grid>
+                  )}
+                </Box>
+              </Grid>
+              <Grid sm={1}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "left",
+                    marginTop: 20,
+                  }}
+                >
+                  <button
+                    onClick={() => handleImageNavigation("right")}
+                    className={styles.btnPrevIndexImg}
+                  >
+                    {"▶"}
+                  </button>
+                </Box>
+              </Grid>
 
-                    <Grid sm={12}>
-                      <Box
-                        marginLeft={7}
-                        sx={{
-                          display: "flex",
-                          justifyContent: "left",
+              <Grid sm={7}>
+                <Grid container spacing={1} m={1}>
+                  <Grid sm={12}>
+                    <Box>
+                      <h2 className={styles.textOverflow}>
+                        {product.title} : {product.description}
+                      </h2>
+                    </Box>
+                  </Grid>
+                  <Grid sm={12}>
+                    <Box>
+                      <Typography component="legend">
+                        คะแนน: {product.rating}
+                      </Typography>
+                      <Rating
+                        name="half-rating-read"
+                        defaultValue={product.rating}
+                        precision={0.5}
+                        readOnly
+                      />
+                    </Box>
+                  </Grid>
+                  <Grid sm={2}>
+                    <p> Brand: {product.brand}</p>
+                  </Grid>
+                  <Grid sm={10}>
+                    <p> Category: {product.category}</p>
+                  </Grid>
+                  <Grid sm={11}>
+                    <Box sx={{ backgroundColor: "black" }} height={1.4}></Box>
+                  </Grid>
+                  <Grid sm={10}>
+                    <Box>
+                      <Grid container>
+                        <Grid sm={2.3}>
+                          <h1 className={styles.price}>$ {product.price}</h1>
+                        </Grid>
+                        <Grid sm={2.1}>
+                          <h2 className={styles.discountPercentage}>
+                            ได้ส่วนลด {product.discountPercentage} %
+                          </h2>
+                        </Grid>
+                        <Grid sm={0.5}></Grid>
+                        <Grid sm={3} sx={{ marginTop: 1.8 }}>
+                          <p className={styles.fontStock}>
+                            มีสินค้าทั้งหมด {product.stock} ชิ้น
+                          </p>
+                        </Grid>
+                      </Grid>
 
-                          height: "40px",
-                        }}
-                      >
+                      <Grid sm={12}>
                         <Box
+                          marginLeft={7}
                           sx={{
-                            marginRight: 5,
-                            marginBottom: 5,
                             display: "flex",
                             justifyContent: "left",
+
+                            height: "40px",
                           }}
                         >
-                          <p className={styles.fontStock}>จำนวน</p>
-                        </Box>
-                        <Button
-                          variant="contained"
-                          onClick={handleDecreaseQuantity}
-                          color="warning"
-                        >
-                          -
-                        </Button>
-                        <Box width={80}>
-                          <TextField
-                            type="number"
-                            value={quantity}
-                            onChange={handleQuantityChange}
-                            size="small"
-                            inputProps={{
-                              max: product.stock, // กำหนดค่าสูงสุดในการใส่ได้ให้เป็นค่า product.stock
-                            }}
-                          />
-                        </Box>
-
-                        <Button
-                          variant="contained"
-                          onClick={handleIncreaseQuantity}
-                          color="warning"
-                        >
-                          +
-                        </Button>
-                      </Box>
-                    </Grid>
-                    <Grid sm={12}>
-                      <Box padding={5}>
-                        <Button
-                          color="warning"
-                          variant="outlined"
-                          onClick={popupOpenHandler}
-                        >
-                          เพิ่มสินค้าไปยังรถเข็น
-                        </Button>
-                        <Snackbar
-                          open={open}
-                          autoHideDuration={6000}
-                          onClose={handleClose}
-                        >
-                          <Alert
-                            onClose={handleClose}
-                            severity="success"
-                            sx={{ width: "100%" }}
-                          >
-                            สินค้าอยู่ในตะกร้าแล้ว
-                          </Alert>
-                        </Snackbar>
-                        
-                        <CustomPopup
-                          onClose={popupCloseHandler}
-                          show={visibility}
-                          title="ยืนยันการซื้อ"
-                        >
-                          <h1>{product.title}</h1>
                           <Box
                             sx={{
-                              // justifyContent: "end",
+                              marginRight: 5,
+                              marginBottom: 5,
                               display: "flex",
-                              backgroundColor: "#009933",
-                              marginLeft: "85.3%",
-                              borderRadius: 4,
-                              boxShadow: "0 2px 10px 0 #33CC66",
+                              justifyContent: "left",
                             }}
                           >
-                            <Button
-                              sx={{
-                                backgroundColor: "#33CC00",
-                                borderRadius: 4,
-                                color: "#DCDCDC",
-                              }}
-                              onClick={handleAddToCart}
-                            >
-                              ตกลง
-                            </Button>
+                            <p className={styles.fontStock}>จำนวน</p>
                           </Box>
-                        </CustomPopup>
-                      </Box>
-                    </Grid>
-                  </Box>
+                          <Button
+                            variant="contained"
+                            onClick={handleDecreaseQuantity}
+                            color="warning"
+                          >
+                            -
+                          </Button>
+                          <Box width={80}>
+                            <TextField
+                              type="number"
+                              value={quantity}
+                              onChange={handleQuantityChange}
+                              size="small"
+                              inputProps={{
+                                max: product.stock, // กำหนดค่าสูงสุดในการใส่ได้ให้เป็นค่า product.stock
+                              }}
+                            />
+                          </Box>
+
+                          <Button
+                            variant="contained"
+                            onClick={handleIncreaseQuantity}
+                            color="warning"
+                          >
+                            +
+                          </Button>
+                        </Box>
+                      </Grid>
+                      <Grid sm={12}>
+                        <Box padding={5}>
+                          <Button
+                            color="warning"
+                            variant="outlined"
+                            onClick={popupOpenHandler}
+                          >
+                            เพิ่มสินค้าไปยังรถเข็น
+                          </Button>
+                          <Snackbar
+                            open={open}
+                            autoHideDuration={6000}
+                            onClose={handleClose}
+                          >
+                            <Alert
+                              onClose={handleClose}
+                              severity="success"
+                              sx={{ width: "100%" }}
+                            >
+                              สินค้าอยู่ในตะกร้าแล้ว
+                            </Alert>
+                          </Snackbar>
+
+                          <CustomPopup
+                            onClose={popupCloseHandler}
+                            show={visibility}
+                            title="ยืนยันการซื้อ"
+                          >
+                            <h1>{product.title}</h1>
+                            <Box
+                              sx={{
+                                // justifyContent: "end",
+                                display: "flex",
+                                backgroundColor: "#009933",
+                                marginLeft: "85.3%",
+                                borderRadius: 4,
+                                boxShadow: "0 2px 10px 0 #33CC66",
+                              }}
+                            >
+                              <Button
+                                sx={{
+                                  backgroundColor: "#33CC00",
+                                  borderRadius: 4,
+                                  color: "#DCDCDC",
+                                }}
+                                onClick={handleAddToCart}
+                              >
+                                ตกลง
+                              </Button>
+                            </Box>
+                          </CustomPopup>
+                        </Box>
+                      </Grid>
+                    </Box>
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>
-          </Grid>
+          </Box>
         </Box>
-      </Box>
+      </Layout>
     </>
   );
 }

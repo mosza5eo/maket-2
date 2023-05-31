@@ -15,6 +15,7 @@ import React, { useState, useEffect } from "react";
 import { yellow } from "@mui/material/colors";
 import debug from "./debug";
 import ProductCard from "@/components/ProductCard";
+import Layout from "@/components/Layout";
 
 
 export async function getStaticProps() {
@@ -93,118 +94,127 @@ export default function Index({ products, categories }) {
 
   return (
     <>
-      <Box sx={{ m: 5, backgroundColor: "#f7f7f7" }} height={4500}>
-        <Head>
-          <title>สินค้าทั้งหมด | moss</title>
-          <meta name="keywords" content="ขายของ,ร้านขายของ,ขายสินค้า" />
-        </Head>
+      <Layout>
+        <Box sx={{ m: 5, backgroundColor: "#f7f7f7" }} height={4500}>
+          <Head>
+            <title>สินค้าทั้งหมด | moss</title>
+            <meta name="keywords" content="ขายของ,ร้านขายของ,ขายสินค้า" />
+          </Head>
 
-        <Box>
-          <Grid container>
-            <Grid sm={12}>
-              <Box
-                marginLeft={7}
-                sx={{ display: "flex", justifyContent: "right" }}
-                // className={styles.figSearchButton}
-              >
-                <p className={styles.fontH} sx={{ display: "flex" }}>
-                  ค้นหาสินค้า
-                </p>
-
-                <Button onClick={handleSearch} className={styles.searchButton}>
-                  <input
-                    type="text"
-                    value={searchTerm}
-                    onChange={handleSearchChange}
-                    placeholder="ค้นหาสินค้า"
-                  />
-                  <Image
-                    src="https://cdn.icon-icons.com/icons2/1129/PNG/512/searchmagnifierinterfacesymbol1_79893.png"
-                    alt="Search Icon"
-                    className={styles.searchIcon}
-                    width="16"
-                    height="16"
-                  />
-                </Button>
-              </Box>
-            </Grid>
+          <Box>
             <Grid container>
-              {/* <Grid sm={12}>
-                <Box height={60} sx={{backgroundColor:yellow[500]}}>
-
-                </Box>
-              </Grid> */}
               <Grid sm={12}>
                 <Box
                   marginLeft={7}
                   sx={{ display: "flex", justifyContent: "right" }}
+                  // className={styles.figSearchButton}
                 >
-                  <p className={styles.fontH}>ค้นหาด้วยราคา</p>
+                  <p className={styles.fontH} sx={{ display: "flex" }}>
+                    ค้นหาสินค้า
+                  </p>
+
                   <Button
                     onClick={handleSearch}
                     className={styles.searchButton}
                   >
                     <input
                       type="text"
-                      value={priceFilter}
-                      height={200}
-                      onChange={handlePriceChange}
-                      placeholder="ราคา"
-                      display="flex"
+                      value={searchTerm}
+                      onChange={handleSearchChange}
+                      placeholder="ค้นหาสินค้า"
                     />
-                    <Box onClick={handleSearch}>
-                      <Box
-                        onClick={toggleSortHighOrder}
-                        width={20}
-                        className={styles.actionHighAndLow}
-                      >
-                        ↑
-                      </Box>
-                      <Box
-                        onClick={toggleSortLowOrder}
-                        width={20}
-                        className={styles.actionHighAndLow}
-                      >
-                        ↓
-                      </Box>
-                    </Box>
+                    <Image
+                      src="https://cdn.icon-icons.com/icons2/1129/PNG/512/searchmagnifierinterfacesymbol1_79893.png"
+                      alt="Search Icon"
+                      className={styles.searchIcon}
+                      width="16"
+                      height="16"
+                    />
                   </Button>
                 </Box>
               </Grid>
-            </Grid>
-            <Grid sm={12}>
-              <Box sx={{ marginLeft: 2 }}>
-                <h1 className={styles.fontHeadCategory}>หมวดหมู่</h1>
-              </Box>
-            </Grid>
-            <Grid sm={12}>
               <Grid container>
-                {categories.map((category) => (
-                  <Grid key={category} sm={2} className={styles.buttonCategory}>
-                    <Link href={`/products/categorys/${category}`}>
-                      <Card sx={{ maxWidth: 250 }} className={styles.fitImg}>
-                        {/* ... */}
-                        <CardContent
-                          sx={{ justifyContent: "center", display: "flex" }}
+                {/* <Grid sm={12}>
+                <Box height={60} sx={{backgroundColor:yellow[500]}}>
+
+                </Box>
+              </Grid> */}
+                <Grid sm={12}>
+                  <Box
+                    marginLeft={7}
+                    sx={{ display: "flex", justifyContent: "right" }}
+                  >
+                    <p className={styles.fontH}>ค้นหาด้วยราคา</p>
+                    <Button
+                      onClick={handleSearch}
+                      className={styles.searchButton}
+                    >
+                      <input
+                        type="text"
+                        value={priceFilter}
+                        height={200}
+                        onChange={handlePriceChange}
+                        placeholder="ราคา"
+                        display="flex"
+                      />
+                      <Box onClick={handleSearch}>
+                        <Box
+                          onClick={toggleSortHighOrder}
+                          width={20}
+                          className={styles.actionHighAndLow}
                         >
-                          <Typography>{category}</Typography>
-                        </CardContent>
-                      </Card>
-                    </Link>
-                  </Grid>
-                ))}
+                          ↑
+                        </Box>
+                        <Box
+                          onClick={toggleSortLowOrder}
+                          width={20}
+                          className={styles.actionHighAndLow}
+                        >
+                          ↓
+                        </Box>
+                      </Box>
+                    </Button>
+                  </Box>
+                </Grid>
+              </Grid>
+              <Grid sm={12}>
+                <Box sx={{ marginLeft: 2 }}>
+                  <h1 className={styles.fontHeadCategory}>หมวดหมู่</h1>
+                </Box>
+              </Grid>
+              <Grid sm={12}>
+                <Grid container>
+                  {categories.map((category) => (
+                    <Grid
+                      key={category}
+                      sm={2}
+                      className={styles.buttonCategory}
+                    >
+                      <Link href={`/products/categorys/${category}`}>
+                        <Card sx={{ maxWidth: 250 }} className={styles.fitImg}>
+                          {/* ... */}
+                          <CardContent
+                            sx={{ justifyContent: "center", display: "flex" }}
+                          >
+                            <Typography>{category}</Typography>
+                          </CardContent>
+                        </Card>
+                      </Link>
+                    </Grid>
+                  ))}
+                </Grid>
               </Grid>
             </Grid>
-          </Grid>
-        </Box>
-        <Box>
-          <Box className={styles.container}>
-            {filteredProducts.map((item) => (
-              <ProductCard key={item.id} products={item} />
-            ))}
+          </Box>
+          <Box>
+            <Box className={styles.container}>
+              {filteredProducts.map((item) => (
+                <ProductCard key={item.id} products={item} />
+              ))}
+            </Box>
           </Box>
         </Box>
-      </Box>
+      </Layout>
     </>
   );
 }
