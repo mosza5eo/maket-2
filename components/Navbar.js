@@ -32,7 +32,7 @@ export default function Navbar() {
           </IconButton>
         </Link>
       </Box>
-      <Link href={"/"}>หน้าแรก</Link>
+      <Link href={"/home"}>หน้าแรก</Link>
       <Link href={"/about"}>ตะกร้าสินค้า</Link>
       <Link href={"/products"}>สินค้าทั้งหมด</Link>
     </nav>

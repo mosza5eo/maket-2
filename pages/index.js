@@ -5,24 +5,23 @@ import Head from "next/head";
 import debug from "./products/debug";
 import { Box } from "@mui/material";
 import Layout from "@/components/Layout";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import useHistory from "react-router-dom";
+import Login from "./login";
 
 export default function Home() {
+  // const {user} = useSelector((state => state.auth))
+  // const history = useHistory()
+
+  // useEffect(() => {
+  //   if(!user) history.push('/login/login')
+  //   else history.push("/");
+  // }, [user])
+
   return (
     <>
-      <Layout>
-        <Head>
-          <title>หน้าแรก | moss</title>
-          <meta name="keywords" content="ขายของ,ร้านขายของ,ขายสินค้า" />
-        </Head>
-        <Box className={styles.container}>
-          <h1 className={styles.title}>หน้าแรกของเว็บ</h1>
-          <Image src="/shopping.svg" width={400} height={400} alt="logo" />
-          <p>ยินดีตอนรับเข้าสู่ร้านค้าแห่งนี้</p>
-          <Link href="/products" className={styles.btn}>
-            ดูสินค้าทั้งหมด
-          </Link>
-        </Box>
-      </Layout>
+      <Login/>
     </>
   );
 }
